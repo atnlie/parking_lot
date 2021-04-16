@@ -1,0 +1,22 @@
+{
+  "name": "parking_lot",
+  "version": "1.0.0",
+  "description": "Assessment Bank Jago",
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/atnlie/parking_lot.git"
+  },
+  "keywords": [
+    "parking_lot"
+  ],
+  "author": "Anton - Heni Kurniyanto",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/atnlie/parking_lot/issues"
+  },
+  "homepage": "https://github.com/atnlie/parking_lot#readme"
+}

@@ -1,0 +1,7 @@
+#!/usr/bin/bash
+
+#@author : Anton - Heni Kurniyanto
+#@copyright :  16-April-2021
+
+# install dependency package libs
+npm install
