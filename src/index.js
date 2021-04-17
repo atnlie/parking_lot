@@ -74,7 +74,13 @@ const executeUserCommands = (input) => {
             break;
         case 'leave':
             try {
-                console.log('Halo leave !');
+                const parkingFee = parkingSlot.carLeaveParking(input);
+                if (parkingFee) {
+                    console.log(`Registration number ` +
+                        `${parkingFee.plateNumber.replace(`-${parkingFee.lastPlateNumber}`, '')} \n` +
+                        `${parkingFee.lastPlateNumber} with Slot Number ${parkingFee.slotNumber} ` +
+                        `is free with Charge $${parkingFee.fee}`);
+                }
             }
             catch (err) {
                 console.log(err.message);
@@ -86,6 +92,8 @@ const executeUserCommands = (input) => {
                 const carParkingInfo = parkingSlot.checkParkingStatus();
                 if (carParkingInfo.length > 1) {
                     console.log(carParkingInfo.join('\n'));
+                } else {
+                    console.log('No cars found in parking area.');
                 }
             }
             catch (err) {

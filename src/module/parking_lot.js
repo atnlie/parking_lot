@@ -11,6 +11,7 @@ class ParkingSLot {
         this.MaxParkingSize = 0;
     }
 
+    // init slot parking
     createParkingLot (input) {
         this.MaxParkingSize = parseInt(input.split(' ')[1]);
 
@@ -23,11 +24,14 @@ class ParkingSLot {
         return this.MaxParkingSize;
     }
 
+    //new car entrance for parking
     reserveParking (input) {
         const plateNumber = input.split(' ')[1];
         if (plateNumber === undefined) {
             throw new Error('Please input "Plate Number"');
         }
+
+        // TODO: handle duplicate plate number
 
         if (this.MaxParkingSize > 0 ) {
             const checkSlot = this.findNearestEmptySlot();
@@ -45,10 +49,11 @@ class ParkingSLot {
                 throw new Error('Sorry, parking lot is full');
             }
         } else {
-            throw new Error('Parking lot is not set yet, please use [createParkingLot] command');
+            throw new Error('Parking lot is empty, please set minimum 1 slot of capacity');
         }
     }
 
+    // check status
     checkParkingStatus () {
         const carParkingInfo = new Array();
         if (this.MaxParkingSize > 0) {
@@ -80,6 +85,52 @@ class ParkingSLot {
         };
     }
 
+    carLeaveParking (input) {
+        if (this.MaxParkingSize > 0) {
+            const plateNumber = input.split(' ')[1];
+            const totHours = parseInt(input.split(' ')[2]);
+
+            if (plateNumber && totHours) {
+                const parkingFee = this.parkingFeeCalculation(totHours);
+
+                for (let i = 0; i < this.MaxParkingSize; i++) {
+                    if (this.ParkingCapacity[i].PlateNumber.toLowerCase() === plateNumber.toLowerCase()) {
+                        this.ParkingCapacity[i] = null;
+
+                        const lastPlateNumber = plateNumber.split('-').pop();
+                        const carParkingFee = {
+                            plateNumber,
+                            totalHours: totHours,
+                            fee: parkingFee,
+                            slotNumber: i + 1,
+                            lastPlateNumber
+                        };
+                        return carParkingFee;
+                    }
+                }
+            } else {
+                throw new Error(`"Plate Number" and "Total Hours" should be input`);
+            }
+            throw new Error(`${plateNumber} not found in parking slot.`);
+        } else {
+            throw new Error('Parking lot is empty, please set minimum 1 slot of capacity');
+        }
+    }
+
+    parkingFeeCalculation (hours) {
+        if (hours <= 0 || isNaN(hours)) {
+            return 0;
+        } else {
+            // 1-2 hours -> fee 10$
+            // more than 3 hours -> 10$ every additional hours
+            if (hours < 3) {
+                return 10;
+            } else {
+                const totFee = (hours - 2) * 10 + 10;
+                return totFee;
+            }
+        }
+    }
 }
 
 module.exports = ParkingSLot;
