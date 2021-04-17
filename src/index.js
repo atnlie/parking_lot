@@ -45,7 +45,7 @@ function commandModes() {
 }
 
 // init class
-const parkingSLot = new ParkingSLot();
+const parkingSlot = new ParkingSLot();
 
 // menu commands
 const executeUserCommands = (input) => {
@@ -54,7 +54,7 @@ const executeUserCommands = (input) => {
     switch (userCommand) {
         case 'create_parking_lot':
             try {
-                const totalSlot = parkingSLot.createParkingLot(input);
+                const totalSlot = parkingSlot.createParkingLot(input);
                 console.log(`Created parking lot with ${totalSlot} slots`);
             }
             catch (err) {
@@ -64,8 +64,8 @@ const executeUserCommands = (input) => {
             break;
         case 'park':
             try {
-                const slotNumber = parkingSLot.reserveParking(input);
-                console.log(`Allocated slot number: ${slotNumber}`);
+                const slotNumber = parkingSlot.reserveParking(input);
+                console.log(`Allocated slot number: ${slotNumber + 1}`);
             }
             catch (err) {
                 console.log(err.message);
@@ -83,7 +83,10 @@ const executeUserCommands = (input) => {
             break;
         case 'status':
             try {
-                console.log('Halo status !');
+                const carParkingInfo = parkingSlot.checkParkingStatus();
+                if (carParkingInfo.length > 1) {
+                    console.log(carParkingInfo.join('\n'));
+                }
             }
             catch (err) {
                 console.log(err.message);

@@ -3,7 +3,7 @@
  * @copyright :  17-April-2021
  */
 class Car {
-    constructor (PlateNumber, Color = "unknown") {
+    constructor (PlateNumber, Color = "-") {
         this.PlateNumber = PlateNumber;
         this.Color = Color;
     }

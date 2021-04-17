@@ -49,6 +49,21 @@ class ParkingSLot {
         }
     }
 
+    checkParkingStatus () {
+        const carParkingInfo = new Array();
+        if (this.MaxParkingSize > 0) {
+            carParkingInfo.push('Slot No. Registration No.')
+            for (let i = 0; i < this.ParkingCapacity.length; i++) {
+                if (this.ParkingCapacity[i] !== null) {
+                    carParkingInfo.push((i+1) + '. ' + this.ParkingCapacity[i].PlateNumber);
+                }
+            }
+            return carParkingInfo;
+        } else {
+            throw new Error('Parking lot is empty, please set minimum 1 slot of capacity');
+        }
+    }
+
     // search empty slot from nearest entry point
     findNearestEmptySlot () {
         for (let i = 0; i < this.ParkingCapacity.length; i++) {
