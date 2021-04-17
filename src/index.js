@@ -2,9 +2,10 @@
  * @author : Anton - Heni Kurniyanto
  * @copyright :  16-April-2021
  */
-
 const fs = require('fs');
 const readLine = require('readline');
+
+const ParkingSLot = require('./module/parking_lot');
 
 const prompts = readLine.createInterface({
     input: process.stdin,
@@ -14,14 +15,16 @@ const prompts = readLine.createInterface({
 let	cliInput = process.argv;
 let isCli = false;
 
+// check input based on file or cli
 if (cliInput[cliInput.length - 1].endsWith('.txt')) {
     isCli = false;
     fs.readFile(cliInput[2], 'utf-8', (err, data) => {
         if (err) {
             console.log('Error reading file');
         }
-        var arr = data.split('\n');
-        for (var i = 0; i < arr.length; i++) {
+
+        let arr = data.split('\n');
+        for (let i = 0; i < arr.length; i++) {
             executeUserCommands(arr[i]);
         }
 
@@ -41,13 +44,18 @@ function commandModes() {
     }
 }
 
+// init class
+const parkingSLot = new ParkingSLot();
+
 // menu commands
 const executeUserCommands = (input) => {
     let userCommand = input.split(' ')[0];
+
     switch (userCommand) {
         case 'create_parking_lot':
             try {
-                console.log('Halo create_parking_lot !');
+                const totalSlot = parkingSLot.create_parking_lot(input)
+                console.log(`Created parking lot with ${totalSlot} slots`);
             }
             catch (err) {
                 console.log(err.message);
