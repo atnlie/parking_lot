@@ -54,7 +54,7 @@ const executeUserCommands = (input) => {
     switch (userCommand) {
         case 'create_parking_lot':
             try {
-                const totalSlot = parkingSLot.create_parking_lot(input)
+                const totalSlot = parkingSLot.createParkingLot(input);
                 console.log(`Created parking lot with ${totalSlot} slots`);
             }
             catch (err) {
@@ -64,7 +64,8 @@ const executeUserCommands = (input) => {
             break;
         case 'park':
             try {
-                console.log('Halo park !');
+                const slotNumber = parkingSLot.reserveParking(input);
+                console.log(`Allocated slot number: ${slotNumber}`);
             }
             catch (err) {
                 console.log(err.message);
