@@ -123,7 +123,8 @@ const executeUserCommands = (input) => {
             break;
         default:
             if (isCli) {
-                console.log('Hello there, please use [create_parking_lot, park, leave, status, delete_parking_lot] instead');
+                console.log('Hello there, please use commands available ' +
+                    '\n[ create_parking_lot, park, leave, status, delete_parking_lot, exit ]');
             }
             break;
     }
