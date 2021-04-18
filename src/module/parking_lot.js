@@ -16,9 +16,10 @@ class ParkingSLot {
     createParkingLot(input) {
         const ParkingSize = parseInt(input.split(' ')[1]);
 
-        if (ParkingSize <= 0 || isNaN(this.MaxParkingSize)) {
+        if (ParkingSize <= 0 || isNaN(ParkingSize)) {
             throw new Error('Please set minimum 1 slot of capacity');
         }
+        this.ParkingCapacity = []; // clean up if there has data
         this.MaxParkingSize = ParkingSize;
         for (let i = 0; i < this.MaxParkingSize; i++) {
             this.ParkingCapacity.push(null);
@@ -26,6 +27,7 @@ class ParkingSLot {
         return this.MaxParkingSize;
     }
 
+    //delete parking slot
     deleteParkingLot() {
         this.MaxParkingSize = 0;
         this.ParkingCapacity = []; // delete all existing data
@@ -96,6 +98,7 @@ class ParkingSLot {
         };
     }
 
+    //car leaving parking area
     carLeaveParking(input) {
         if (this.MaxParkingSize > 0) {
             const plateNumber = input.split(' ')[1];

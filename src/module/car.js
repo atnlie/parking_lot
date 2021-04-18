@@ -5,7 +5,7 @@
 class Car {
     constructor (PlateNumber, Color = "-") {
         this.PlateNumber = PlateNumber;
-        this.Color = Color;
+        this.Color = Color; // not be used for operation because not mandatory
     }
 }
 
