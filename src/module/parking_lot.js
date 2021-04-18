@@ -37,6 +37,7 @@ class ParkingSLot {
     //new car entrance for parking
     reserveParking(input) {
         const plateNumber = input.split(' ')[1];
+
         if (plateNumber === undefined) {
             throw new Error('Please input "Plate Number"');
         }

@@ -5,7 +5,7 @@
 
 // remove unused spaces
 const removeSpacesWrapper = (input) => {
-    if (input !== undefined) {
+    if (input === undefined) {
         return input;
     }
     return input.replace(/^\s+|\s+$/g,'');

@@ -6,3 +6,5 @@
 # install dependency package libs
 npm install
 
+# testing unit test cases
+npm test test/specs.js
