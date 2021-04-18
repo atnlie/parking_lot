@@ -63,6 +63,19 @@ const executeUserCommands = (input) => {
             }
 
             break;
+        case 'delete_parking_lot':
+            try {
+                if (parkingSlot.deleteParkingLot()) {
+                    console.log(`Parking lot set 0 slots`);
+                } else {
+                    console.log(`Parking lot can't to delete.`);
+                }
+            }
+            catch (err) {
+                console.log(err.message);
+            }
+
+            break;
         case 'park':
             try {
                 const slotNumber = parkingSlot.reserveParking(input);
@@ -109,7 +122,7 @@ const executeUserCommands = (input) => {
             process.exit(0);
             break;
         default:
-            console.log('Hello there, please use [create_parking_lot, park, leave, status] instead');
+            console.log('Hello there, please use [create_parking_lot, park, leave, status, delete_parking_lot] instead');
             break;
     }
     commandModes();

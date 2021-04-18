@@ -4,6 +4,7 @@
  */
 
 const Car = require('./car');
+const utils = require('../helper/utils');
 
 class ParkingSLot {
     constructor() {
@@ -13,15 +14,22 @@ class ParkingSLot {
 
     // init slot parking
     createParkingLot(input) {
-        this.MaxParkingSize = parseInt(input.split(' ')[1]);
+        const ParkingSize = parseInt(input.split(' ')[1]);
 
-        if (this.MaxParkingSize <= 0 || isNaN(this.MaxParkingSize)) {
+        if (ParkingSize <= 0 || isNaN(this.MaxParkingSize)) {
             throw new Error('Please set minimum 1 slot of capacity');
         }
+        this.MaxParkingSize = ParkingSize;
         for (let i = 0; i < this.MaxParkingSize; i++) {
             this.ParkingCapacity.push(null);
         }
         return this.MaxParkingSize;
+    }
+
+    deleteParkingLot() {
+        this.MaxParkingSize = 0;
+        this.ParkingCapacity = []; // delete all existing data
+        return true;
     }
 
     //new car entrance for parking
@@ -31,7 +39,10 @@ class ParkingSLot {
             throw new Error('Please input "Plate Number"');
         }
 
-        // TODO: handle duplicate plate number
+        const isPlateNumberExist = utils.searchCarInSlot(this.ParkingCapacity, plateNumber);
+        if (isPlateNumberExist !== undefined) {
+            throw new Error(`${plateNumber} is already exist in parking area, try another car.`);
+        }
 
         if (this.MaxParkingSize > 0) {
             const checkSlot = this.findNearestEmptySlot();
@@ -91,7 +102,7 @@ class ParkingSLot {
             const totHours = parseInt(input.split(' ')[2]);
 
             if (plateNumber && totHours) {
-                const parkingFee = this.parkingFeeCalculation(totHours);
+                const parkingFee = utils.parkingFeeCalculation(totHours);
 
                 for (let i = 0; i < this.MaxParkingSize; i++) {
                     if (this.ParkingCapacity[i] === null) {
@@ -118,21 +129,6 @@ class ParkingSLot {
             }
         } else {
             throw new Error('Parking lot is empty, please set minimum 1 slot of capacity');
-        }
-    }
-
-    parkingFeeCalculation(hours) {
-        if (hours <= 0 || isNaN(hours)) {
-            return 0;
-        } else {
-            // 1-2 hours -> fee 10$
-            // more than 3 hours -> 10$ every additional hours
-            if (hours < 3) {
-                return 10;
-            } else {
-                const totFee = (hours - 2) * 10 + 10;
-                return totFee;
-            }
         }
     }
 }
