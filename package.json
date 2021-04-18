@@ -6,17 +6,9 @@
     "start": "nodemon src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/atnlie/parking_lot.git"
-  },
   "keywords": [
     "parking_lot"
   ],
-  "author": "Anton - Heni Kurniyanto",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/atnlie/parking_lot/issues"
-  },
-  "homepage": "https://github.com/atnlie/parking_lot#readme"
+  "author": "Anton - Heni Kurniyanto -> atnlie@gmail.com",
+  "license": "ISC"
 }

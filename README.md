@@ -10,6 +10,10 @@ When a car enters my parking lot, I want to have a ticket issued to the driver. 
 - Print status of parking slot : `status`
 - Delete parking lot to 0: `delete_parking_lot`
 
-###Preparing before use application
+###Execute using binary file
 - To install all dependencies, compile and run tests: `bin/setup`
 - To run the code input from a file: `bin/parking_lot src/data/input.txt`
+
+###Execute using node
+- To install all dependencies, compile and run tests: `npm run start` or `node src/index.js`
+- To run the code input from a file: `node src/index.js src/data/input.txt`

@@ -23,9 +23,9 @@ if (cliInput[cliInput.length - 1].endsWith('.txt')) {
             console.log('Error reading file');
         }
 
-        let arr = data.split('\n');
-        for (let i = 0; i < arr.length; i++) {
-            executeUserCommands(arr[i]);
+        let arrayCli = data.split('\n');
+        for (let i = 0; i < arrayCli.length; i++) {
+            executeUserCommands(arrayCli[i]);
         }
 
         process.exit(1);
@@ -122,7 +122,9 @@ const executeUserCommands = (input) => {
             process.exit(0);
             break;
         default:
-            console.log('Hello there, please use [create_parking_lot, park, leave, status, delete_parking_lot] instead');
+            if (isCli) {
+                console.log('Hello there, please use [create_parking_lot, park, leave, status, delete_parking_lot] instead');
+            }
             break;
     }
     commandModes();
