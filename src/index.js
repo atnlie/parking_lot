@@ -4,8 +4,8 @@
  */
 const fs = require('fs');
 const readLine = require('readline');
-
 const ParkingSLot = require('./module/parking_lot');
+const utils = require('./helper/utils');
 
 const prompts = readLine.createInterface({
     input: process.stdin,
@@ -49,7 +49,8 @@ const parkingSlot = new ParkingSLot();
 
 // menu commands
 const executeUserCommands = (input) => {
-    let userCommand = input.split(' ')[0];
+    const userInputCommand = input.split(' ')[0];
+    const userCommand = utils.removeSpacesWrapper(userInputCommand);  // remove unused spaces in front and end command
 
     switch (userCommand) {
         case 'create_parking_lot':
@@ -80,6 +81,8 @@ const executeUserCommands = (input) => {
                         `${parkingFee.plateNumber.replace(`-${parkingFee.lastPlateNumber}`, '')} \n` +
                         `${parkingFee.lastPlateNumber} with Slot Number ${parkingFee.slotNumber} ` +
                         `is free with Charge $${parkingFee.fee}`);
+                } else {
+                    console.log('Car not found in parking area.');
                 }
             }
             catch (err) {
