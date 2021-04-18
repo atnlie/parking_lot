@@ -29,7 +29,7 @@ describe('Unit Testing CLI in ParkingLot class', () => {
         done();
     });
 
-    it('Test "park" commands to Allocating Parking 1',(done) => {
+    it('Test "park" commands to Allocating Parking 1', (done) => {
         commands = 'park KA-01-HH-1234';
         const slotAvailable = parkingLot.reserveParking(commands);
         assert.equal(slotAvailable, 0, 'Car will use nearest slot.');
@@ -74,7 +74,7 @@ describe('Unit Testing CLI in ParkingLot class', () => {
         commands = 'status';
         const carParkingInfo = parkingLot.checkParkingStatus(commands);
 
-        const result = [ 'Slot No. Registration No.',
+        const result = ['Slot No. Registration No.',
             '1. KA-01-HH-1234',
             '2. KA-01-HH-9999'];
 
@@ -150,7 +150,7 @@ describe('Unit Testing CLI in ParkingLot class', () => {
         done();
     });
 
-    it('Test "park" commands to Allocating Parking', (done) => {
+    it('Leave parking without plat number and hours params and position after empty slot', (done) => {
         //create parking slot
         commands = 'create_parking_lot 3';
         parkingLot.createParkingLot(commands);
@@ -178,6 +178,38 @@ describe('Unit Testing CLI in ParkingLot class', () => {
         }
         done();
     });
+
+    it('Leave parking but parking lot not set yet', (done) => {
+        // delete parking slot
+        parkingLot.deleteParkingLot();
+        commands = 'leave KA-01-HH-1235 4';
+        try {
+            parkingLot.carLeaveParking(commands);
+        } catch (err) {
+            assert.equal(err.message, 'Parking lot is empty, please set minimum 1 slot of capacity');
+        }
+
+        done();
+    });
+
+    describe('TEST', () => {
+    const parkingLot2 = new ParkingLot();
+    it('Reserve Parking without plate number', (done) => {
+        parkingLot2.deleteParkingLot();
+        commands = 'create_parking_lot 2';
+        parkingLot2.createParkingLot(commands);
+        commands = 'park KA-01-HH-1235';
+        parkingLot2.reserveParking(commands);
+        try {
+            parkingLot2.reserveParking(commands);
+        } catch (err) {
+            assert.equal(err.message, 'KA-01-HH-1235 is already exist in parking area, try another car.')
+        }
+        done();
+    });
+});
+
+
 });
 
 describe('Unit Testing command from txt file in ParkingLot class', () => {
@@ -251,7 +283,7 @@ describe('Unit Testing command from txt file in ParkingLot class', () => {
             try {
                 parkingLot.reserveParking(commands[6]);
             } catch (err) {
-                assert.equal(err.message, 'Sorry, parking lot is full');
+                assert.equal(err.message, 'KA-01-HH-3141 is already exist in parking area, try another car.');
             }
             done();
         });
@@ -277,7 +309,7 @@ describe('Unit Testing command from txt file in ParkingLot class', () => {
 
         it('Test "status" commands', (done) => {
             const carParkingInfo = parkingLot.checkParkingStatus(commands[8]);
-            const result = [ 'Slot No. Registration No.',
+            const result = ['Slot No. Registration No.',
                 '1. KA-01-HH-1234',
                 '2. KA-01-HH-9999',
                 '3. KA-01-BB-0001',

@@ -23,15 +23,15 @@ const parkingFeeCalculation = (hours) => {
         if (hours < 3) {
             return 10;
         } else {
-            const totFee = (hours - 2) * 10 + 10;
-            return totFee;
+            return (hours - 2) * 10 + 10;
         }
     }
 }
 
 // find car by plate number whether plates already registered or not
 const searchCarInSlot = (carParkingDataArray, plateNumber) => {
-    return carParkingDataArray.find(element => element !== null && element.plateNumber === plateNumber);
+    return carParkingDataArray.find(element => element !== null &&
+        element.PlateNumber === plateNumber);
 }
 
 module.exports = { removeSpacesWrapper, parkingFeeCalculation, searchCarInSlot };

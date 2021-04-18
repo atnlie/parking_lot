@@ -56,8 +56,6 @@ class ParkingSLot {
                     const carEntrance = new Car(plateNumber, carColor);
                     this.ParkingCapacity[checkSlot.slotNumber] = carEntrance;
                     return checkSlot.slotNumber;
-                } else {
-                    throw new Error('Please input "Plate Number');
                 }
             } else {
                 throw new Error('Sorry, parking lot is full');
@@ -126,7 +124,6 @@ class ParkingSLot {
                         };
                         return carParkingFee;
                     }
-
                 }
             } else {
                 throw new Error(`"Plate Number" and "Total Hours" should be input`);
@@ -135,6 +132,7 @@ class ParkingSLot {
             throw new Error('Parking lot is empty, please set minimum 1 slot of capacity');
         }
     }
+
 }
 
 module.exports = ParkingSLot;

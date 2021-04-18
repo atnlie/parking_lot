@@ -45,9 +45,9 @@ describe('Testing utils functionality', () => {
 
     it('searchCarInSlot is available', () => {
         const carParkingDataArray = [{
-            plateNumber: 'KA-01-HH-1234'
+            PlateNumber: 'KA-01-HH-1234'
         },{
-            plateNumber: 'KA-01-HH-9999'
+            PlateNumber: 'KA-01-HH-9999'
         }];
 
         let plateNumber = 'KA-01-HH-1234';
@@ -55,10 +55,7 @@ describe('Testing utils functionality', () => {
         assert.exists(carExist, plateNumber);
 
         plateNumber = 'KA-01-HH-1234X';
-        try {
-            carExist = utils.searchCarInSlot(carParkingDataArray, plateNumber);
-        } catch (err) {
-            assert.exists(err.message, undefined);
-        }
+        carExist  = utils.searchCarInSlot(carParkingDataArray, plateNumber);
+        assert.equal(carExist, undefined);
     });
 });
