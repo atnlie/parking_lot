@@ -17,3 +17,7 @@ When a car enters my parking lot, I want to have a ticket issued to the driver. 
 ###Execute using node
 - To install all dependencies, compile and run tests: `npm run start` or `node src/index.js`
 - To run the code input from a file: `node src/index.js src/data/input.txt`
+
+###Execute Unit Test and Coverage
+- To run test unit test cases: `npm run test`
+- To run test coverage unit test cases: `npm run test:coverage`
