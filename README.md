@@ -12,7 +12,8 @@ When a car enters my parking lot, I want to have a ticket issued to the driver. 
 
 ###Execute using binary file
 - To install all dependencies, compile and run tests: `bin/setup`
-- To run the code input from a file: `bin/parking_lot src/data/input.txt`
+- To run the code input from a file: `bin/parking_lot ./src/data/input.txt`
+- To run the code input CLI manual: `bin/parking_lot`
 
 ###Execute using node
 - To install all dependencies, compile and run tests: `npm run start` or `node src/index.js`
